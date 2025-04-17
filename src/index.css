@@ -1,0 +1,43 @@
+/*
+全局CSS样式文件，定义了应用程序的基础样式，包括字体设置和文本渲染优化。
+*/
+/*
+文件功能概述：
+- 定义了应用程序的全局CSS样式
+- 设置了默认字体族和文本渲染属性
+- 为代码块设置了特定的等宽字体
+
+依赖关系：
+- 作为全局样式文件，被应用程序入口文件引入
+- 可能与其他CSS模块或样式文件配合使用
+
+使用说明：
+1. 在应用程序入口文件(如main.tsx或App.tsx)中引入:
+   import './index.css'
+2. 样式会自动应用到整个应用程序
+
+系统架构相关：
+- 前端技术栈：React + Tailwind CSS + TypeScript
+- 样式架构：采用全局CSS配合Tailwind CSS的原子化CSS方案
+- 本文件作为基础样式层，与Tailwind CSS配合使用
+
+主要样式说明：
+1. body样式：
+   - 移除默认外边距
+   - 设置系统默认字体
+   - 启用字体平滑渲染
+
+2. code样式：
+   - 为代码显示设置等宽字体族
+*/
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
