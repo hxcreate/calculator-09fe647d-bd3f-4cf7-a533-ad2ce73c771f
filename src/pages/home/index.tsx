@@ -28,6 +28,24 @@ export default function Calculator() {
       } catch (error) {
         setResult('Error');
       }
+    } else if (value === '√') {
+      try {
+        // Handle square root
+        const currentNumber = parseFloat(input);
+        if (isNaN(currentNumber)) {
+          setResult('Invalid input');
+          return;
+        }
+        if (currentNumber < 0) {
+          setResult('Cannot calculate square root of negative number');
+          return;
+        }
+        const sqrtResult = Math.sqrt(currentNumber);
+        setResult(sqrtResult.toString());
+        setInput(`√(${input})`);
+      } catch (error) {
+        setResult('Error');
+      }
     } else {
       setInput(prev => {
         // Prevent multiple operators in a row
@@ -69,16 +87,17 @@ export default function Calculator() {
   }, [handleButtonClick]);
 
   const buttons = [
-    '7', '8', '9', '/',
-    '4', '5', '6', '*',
-    '1', '2', '3', '-',
-    '0', '.', 'C', '+'
+    '√', '7', '8', '9',
+    '/', '4', '5', '6',
+    '*', '1', '2', '3',
+    '-', '0', '.', 'C',
+    '+'
   ];
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-background p-4">
       <Card className="p-6 w-full max-w-md shadow-lg">
-        <div className="mb-4 p-4 bg-muted rounded-md overflow-hidden">
+        <div className="my-44 p-4 bg-muted rounded-md overflow-hidden">
           <div className="text-right text-2xl font-mono truncate">{input || '0'}</div>
           <div className="text-right text-lg font-mono text-muted-foreground truncate">{result}</div>
         </div>
@@ -86,10 +105,12 @@ export default function Calculator() {
           {buttons.map((btn) => (
             <Button
               key={btn}
-              variant={isOperator(btn) ? 'secondary' : 'outline'}
+              variant={isOperator(btn) ? 'secondary' : btn === '√' ? 'default' : 'outline'}
               size="lg"
               onClick={() => handleButtonClick(btn)}
-              className={`font-mono hover:scale-[0.98] transition-transform ${btn === 'C' ? 'hover:bg-destructive hover:text-destructive-foreground' : ''}`}
+              className={`font-mono hover:scale-[0.98] transition-transform ${
+                btn === 'C' ? 'hover:bg-destructive hover:text-destructive-foreground' : ''
+              }`}
             >
               {btn}
             </Button>
